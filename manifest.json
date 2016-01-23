@@ -1,0 +1,26 @@
+{
+  "manifest_version": 2,
+  "name": "PageChat",
+  "short_name": "PageChat",
+  "description": "",
+  "version": "0.0.1",
+  "minimum_chrome_version": "38",
+  "icons": {
+    
+  },
+  "app": {
+    "background": {
+      "scripts": ["js/background.js"]
+    }
+  },
+  "content_scripts": [
+    {
+    "all_frames": false,
+    "matches": ["<all_urls>"],
+    "exclude_matches": [],
+      "js": [
+        "js/jquery-1.12.0.js"
+      ]
+    }
+  ]
+}
