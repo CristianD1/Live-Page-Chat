@@ -2,12 +2,15 @@
 <html>
   <head>
     <title>PageChat</title>
-    <link rel="stylesheet" href="css/styles.css">
+    
+    <link rel="stylesheet" href="assets/materialize/materialize.min.css">  
+    <link rel="stylesheet" href="css/general.css">
+  
   </head>
   
   <body>
     
-    <div id="chatBox">
+    <!--div id="chatBox">
     
       <textarea id="chatText" readonly="readonly" value=""></textarea>
       
@@ -18,9 +21,30 @@
         </div>
       </span>
     
+    </div-->
+    
+    <div class="row">
+
+      <div class="col s3">
+        <!-- Grey navigation panel -->
+      </div>
+
+      <div class="col s9">
+        <!-- Teal page content  -->
+      </div>
+
     </div>
+    
+    <div class="row">
+      <div class="grid-example col s12"><span class="flow-text">I am always full-width (col s12)</span></div>
+      <div class="grid-example col s12 m6"><span class="flow-text">I am full-width on mobile (col s12 m6)</span></div>
+    </div>
+    
+    
+    
   
   <Script src="js/jquery-1.12.0.min.js"></script>
+  <script src="assets/materialize/materialize.min.js"></script>
   <script src="js/main.js"></script>
     
   </body>
