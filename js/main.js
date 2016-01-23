@@ -1,12 +1,31 @@
+
+var objMsgButton = $("#submitMsgButton");
+var objEnteredText = $("#enteredText");
+var objChatText = $("#chatText");
+
+
 window.onload = function() {
-  console.log( $('#enterText').value  );
+  
 };
 
-// bindings
-document.getElementById("submitMsgButton").addEventListener("click",submitMsg);
+// Events
+$(objEnteredText).keyup(function (e) {
+  var keycode = (event.keyCode ? event.keyCode : event.which);
+  if(keycode === 13){
+    addMsgToChat();
+  }
+});
+objMsgButton.click(function(){
+  addMsgToChat();
+});
 
-function submitMsg(){
-  document.getElementById('chatText').value += "\n" + document.getElementById('enterText').value;
-  document.getElementById('enterText').value = "";
+var addMsgToChat = function(){
+  var chatDisplayText = objChatText.val();
+  var enteredText = objEnteredText.val();
+  
+  objChatText.val( chatDisplayText ? chatDisplayText+"\n"+enteredText : enteredText );
+  
+  objChatText.animate({ scrollTop: objChatText.prop("scrollHeight")}, 250);
+  
+  objEnteredText.val("");
 }
-

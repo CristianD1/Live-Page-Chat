@@ -7,8 +7,9 @@ body{
 
 #chatText{
   padding-bottom: 10px;
-  width: 500px;
-  height:250px;
+  width:  500px;
+  height: 250px;
+  overflow: auto;
 }
 
 #userInput{
@@ -17,7 +18,7 @@ body{
   height: 200px;
 }
 
-#enterText{
+#enteredText{
   position: relative;
   float: left;
   text-align: left;
