@@ -3,7 +3,11 @@
 var objMsgButton = $("#submitMsgButton");
 var objEnteredText = $("#enteredText");
 var objChatText = $("#chatText");
-var userName = "Username";
+
+var objNameText = $("#User_Name");
+
+var localName = objNameText.val();
+
 
 // global objects
 /*var msgPacket = {
@@ -15,7 +19,12 @@ window.onload = function() {
 };
 
 // Events
-$(objEnteredText).keyup(function (e) {
+objNameText.change(function(){
+  var t = objNameText.val();
+  localName = (t != "")?t:"Anon";
+  objNameText.val(localName);
+});
+objEnteredText.keyup(function (e) {
   var keycode = (event.keyCode ? event.keyCode : event.which);
   if(keycode === 13){
     createMsgPacket();
@@ -73,7 +82,7 @@ var addMsgToChat = function(senderType){
                               enteredText+
                             '</div>'+
                             '<div class="card-action extraInfo">'+
-                              userName+" - "+time+
+                              localName+" - "+time+
                             '</div>'+
                           '</div>'+
                         '</div>'+

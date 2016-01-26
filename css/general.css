@@ -46,6 +46,14 @@ body{
   color: red;
 }
 
+/* Menu Styles */
+.tabButtons{
+  background-color: #64b5f6; /* blue-lighten 2 */
+}
+.tabButtons:hover{
+  background-color: #2196f3; /* blue */
+}
+
 #chatText{
   height: 350px;
   overflow-y: auto;

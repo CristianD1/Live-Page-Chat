@@ -31,10 +31,30 @@
     
     <div class="row chatApp">
       
-      <div class="col s3 chatMenu">
-        side menu
+      <div class="col s4 chatMenu">
+        
+        <ul class="collapsible popout" data-collapsible="accordion">
+          <li>
+            <div class="waves-effect waves-light btn-large collapsible-header tabButtons" href="#">People</div>
+            <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+          </li>
+          <li>
+            <div class="waves-effect waves-light btn-large collapsible-header tabButtons">Statistics</div>
+            <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+          </li>
+          <li>
+            <div class="waves-effect waves-light btn-large collapsible-header tabButtons">Settings</div>
+            <div class="collapsible-body">
+              <div class="input-field col s12">
+                <input id="User_Name" type="text" class="validate usernameEntry" value="Anon">
+                <label for="User_Name">Your Username</label>
+              </div>
+            </div>
+          </li>
+        </ul>
+        
       </div>
-      <div class="col s9 chatBox">
+      <div class="col s8 chatBox">
         
         <!-- main chat area -->
         <div class="row">
