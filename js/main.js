@@ -20,8 +20,9 @@ window.onload = function() {
 
 // Events
 objNameText.change(function(){
-  var prevName = objNameText.val();
-  localName = (prevName != "")?prevName:"Anon";
+  var prevName = localName;
+  var t = objNameText.val();
+  localName = (t != "")?t:prevName;
   objNameText.val(localName);
   
   chrome.runtime.sendMessage(
