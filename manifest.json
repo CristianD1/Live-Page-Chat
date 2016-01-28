@@ -10,7 +10,10 @@
   },
   "app": {
     "background": {
-      "scripts": ["js/background.js"]
+      "scripts": [
+        "js/socket.io.js",
+        "js/background.js"
+      ]
     }
   },
   "content_scripts": [

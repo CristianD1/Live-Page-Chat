@@ -20,9 +20,23 @@ window.onload = function() {
 
 // Events
 objNameText.change(function(){
-  var t = objNameText.val();
-  localName = (t != "")?t:"Anon";
+  var prevName = objNameText.val();
+  localName = (prevName != "")?prevName:"Anon";
   objNameText.val(localName);
+  
+  chrome.runtime.sendMessage(
+    {
+      packetType: 'left chat',
+      sender: prevName,
+      location: window.location.href
+    }, function(response){console.log(response);});
+  chrome.runtime.sendMessage(
+    {
+      packetType: 'joined chat',
+      sender: localName,
+      location: window.location.href
+    }, function(response){console.log(response);});
+  
 });
 objEnteredText.keyup(function (e) {
   var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -36,19 +50,30 @@ objMsgButton.click(function(){
 
 var createMsgPacket = function(){
   
+  var theMsg = objEnteredText.val().replace(/(\r\n|\n|\r)/gm,"");
+  
   // RUN MSG PROCESSING
   // SEND TO SERVER
+  // testing msg push
+  chrome.runtime.sendMessage(
+    {
+      packetType: "user message", 
+      message: theMsg, 
+      sender: localName,
+      location: window.location.href
+    },
+    function(response){console.log(response);});
   
   // RETRIEVE RESPONSE
   
   // push to chat
-  addMsgToChat("user");
+  addMsgToChat("user", theMsg);
 }
 
-var addMsgToChat = function(senderType){
+var addMsgToChat = function(senderType, message){
   
   var chatDisplayText = objChatText.text();
-  var enteredText = objEnteredText.val().replace(/(\r\n|\n|\r)/gm,"");
+  var enteredText = message;
   var msgClass = "";
   
   var errorMsg = "";
