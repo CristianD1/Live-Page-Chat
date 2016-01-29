@@ -6,74 +6,119 @@ var objChatText = $("#chatText");
 
 var objNameText = $("#User_Name");
 
-var localName = objNameText.val();
-
-
-// global objects
-/*var msgPacket = {
-  sender: 
-}*/
-
-window.onload = function() {
-  
+var userList = {
+  //    userCount: 
+  //    uid: {
+  //      username: ,
+  //      userLocation: ,
+  //    } 
 };
 
-// Events
+var currUserInfo = {
+  uid: null,
+  username: objNameText.val(),
+  userLocation: window.location.href,
+};
+
+
+window.onload = function(){
+  chrome.runtime.sendMessage(
+    {
+      packetType: 'joined chat',
+      sender: currUserInfo.username,
+      uid: currUserInfo.uid,
+      location: currUserInfo.userLocation
+    }, function(response){console.log(response);});
+}
+
+// Deal with any message received from the server
+chrome.runtime.onMessage.addListener(function(info) {
+  
+  switch(info.action){
+    case 'userList':
+      /*info = {action, userList}*/
+      /*userList = '{}uid|*||sender|*||location|*{}uid|*||sender|*||location|*'*/
+      var tUserList = info.userList.split('{}');
+      var tUserCount = userList.length;
+      
+      for(var i = 0; i < tUserCount; i++){
+        if(tUserList[i] !== ''){
+          var tUserInfoSplit = tUserList[i].split('||');
+          
+          var tUid = tUserInfoSplit[0].split('|')[1];
+          userList[tUid] = {
+            username: tUserInfoSplit[1].split('|')[1],
+            userLocation: tUserInfoSplit[2].split('|')[1]
+          };
+        }
+      }
+    
+      break;
+    case 'msg':
+      /*info = {action, uid, sender, location, message, userList}*/
+      
+    
+      break;
+    default:
+     
+  }
+  
+});
+
+
+// Deal with name changing
 objNameText.change(function(){
-  var prevName = localName;
+  var prevName = currUserInfo.username;
   var t = objNameText.val();
-  localName = (t != "")?t:prevName;
-  objNameText.val(localName);
+  currUserInfo.username = (t != "")? t : prevName;
+  objNameText.val(currUserInfo.username);
   
   chrome.runtime.sendMessage(
     {
       packetType: 'left chat',
       sender: prevName,
-      location: window.location.href
+      uid: currUserInfo.uid,
+      location: currUserInfo.userLocation
     }, function(response){console.log(response);});
+    
+  // uid should be re-assigned here  
   chrome.runtime.sendMessage(
     {
       packetType: 'joined chat',
-      sender: localName,
-      location: window.location.href
+      sender: currUserInfo.username,
+      uid: currUserInfo.uid,
+      location: currUserInfo.userLocation
     }, function(response){console.log(response);});
-  
 });
+// Deal with pressing the enter key to submit a message
 objEnteredText.keyup(function (e) {
   var keycode = (event.keyCode ? event.keyCode : event.which);
   if(keycode === 13){
     createMsgPacket();
   }
 });
+// Deal with pressing the submit button
 objMsgButton.click(function(){
   createMsgPacket();
 });
 
+// Given a message event, create a message packet and send it to the server
 var createMsgPacket = function(){
-  
   var theMsg = objEnteredText.val().replace(/(\r\n|\n|\r)/gm,"");
   
-  // RUN MSG PROCESSING
-  // SEND TO SERVER
-  // testing msg push
   chrome.runtime.sendMessage(
     {
       packetType: "user message", 
       message: theMsg, 
-      sender: localName,
-      location: window.location.href
+      sender: currUserInfo.username,
+      uid: currUserInfo.uid,
+      location: currUserInfo.userLocation
     },
     function(response){console.log(response);});
-  
-  // RETRIEVE RESPONSE
-  
-  // push to chat
-  addMsgToChat("user", theMsg);
 }
 
 var addMsgToChat = function(senderType, message){
-  
-  var chatDisplayText = objChatText.text();
+
   var enteredText = message;
   var msgClass = "";
   
@@ -99,7 +144,7 @@ var addMsgToChat = function(senderType, message){
   if( !errorMsg ) {
     // Create card object that contains the message and add it to the message display card
     var dt = new Date();
-    var time = dt.getHours()%12 + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+    var time = dt.getHours()%12 + ':' + dt.getMinutes() + ':' + dt.getSeconds();
     
     objChatText.append('<div class="row">'+
                         '<div class="col s12">'+
@@ -108,7 +153,7 @@ var addMsgToChat = function(senderType, message){
                               enteredText+
                             '</div>'+
                             '<div class="card-action extraInfo">'+
-                              localName+" - "+time+
+                              currUserInfo.username+' - '+time+
                             '</div>'+
                           '</div>'+
                         '</div>'+
