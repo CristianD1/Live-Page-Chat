@@ -20,22 +20,12 @@ var currUserInfo = {
   userLocation: window.location.href,
 };
 
-
-window.onload = function(){
-  chrome.runtime.sendMessage(
-    {
-      packetType: 'joined chat',
-      sender: currUserInfo.username,
-      uid: currUserInfo.uid,
-      location: currUserInfo.userLocation
-    }, function(response){console.log(response);});
-}
-
 // Deal with any message received from the server
 chrome.runtime.onMessage.addListener(function(info) {
   
   switch(info.action){
     case 'userList':
+      console.log("Userlist found: "+info.userList);
       /*info = {action, userList}*/
       /*userList = '{}uid|*||sender|*||location|*{}uid|*||sender|*||location|*'*/
       var tUserList = info.userList.split('{}');
@@ -56,7 +46,7 @@ chrome.runtime.onMessage.addListener(function(info) {
       break;
     case 'msg':
       /*info = {action, uid, sender, location, message, userList}*/
-      
+      console.log("msg found: " + info.message)
     
       break;
     default:
@@ -105,7 +95,7 @@ objMsgButton.click(function(){
 // Given a message event, create a message packet and send it to the server
 var createMsgPacket = function(){
   var theMsg = objEnteredText.val().replace(/(\r\n|\n|\r)/gm,"");
-  
+  console.log("here: " + theMsg+" "+currUserInfo.uid+" "+currUserInfo.username)
   chrome.runtime.sendMessage(
     {
       packetType: "user message", 

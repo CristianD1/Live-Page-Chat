@@ -14,11 +14,10 @@ chrome.app.runtime.onLaunched.addListener(function(launchData) {
     }
   );
   
-  socket = io.connect('http://170.75.162.21:3000');
+  socket = io.connect('http://170.75.162.21:3030'); 
   
   chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse){
-    
       if( request.packetType === 'joined chat' ){
         socket.emit('joined chat', request.sender, request.location, request.uid);
       }
