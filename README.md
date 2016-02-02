@@ -1,7 +1,6 @@
 # Live-Page-Chat
-Page-to-page live chat. (Chrome Extension)
 
-[![The interface](liveChatInterface.png)]
+[![The interface]](liveChatInterface.png)
 
 ## What is it?
 
