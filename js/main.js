@@ -84,6 +84,7 @@ objNameText.change(function(){
 objEnteredText.keyup(function (e) {
   var keycode = (event.keyCode ? event.keyCode : event.which);
   if(keycode === 13){
+    console.log("sent");
     createMsgPacket();
   }
 });
@@ -98,7 +99,7 @@ var createMsgPacket = function(){
   console.log("here: " + theMsg+" "+currUserInfo.uid+" "+currUserInfo.username)
   chrome.runtime.sendMessage(
     {
-      packetType: "user message", 
+      packetType: "chat message", 
       message: theMsg, 
       sender: currUserInfo.username,
       uid: currUserInfo.uid,

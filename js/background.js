@@ -4,8 +4,9 @@
  * @see http://developer.chrome.com/apps/app.runtime.html
  * @see http://developer.chrome.com/apps/app.window.html
  */
- 
+ console.log('lol');
 chrome.app.runtime.onLaunched.addListener(function(launchData) {
+  console.log('hibob');
   chrome.app.window.create(
     'index.html',
     {
@@ -14,10 +15,11 @@ chrome.app.runtime.onLaunched.addListener(function(launchData) {
     }
   );
   
-  socket = io.connect('http://170.75.162.21:3030'); 
+  socket = io.connect('http://170.75.162.21:3030');
   
   chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse){
+      console.log("hi im in the background");
       if( request.packetType === 'joined chat' ){
         socket.emit('joined chat', request.sender, request.location, request.uid);
       }
@@ -26,7 +28,8 @@ chrome.app.runtime.onLaunched.addListener(function(launchData) {
         socket.emit('left chat', request.sender, request.location, request.uid);
       }
     
-      if( request.packetType === 'user message' ){
+      if( request.packetType === 'chat message' ){
+        console.log("im receiving stuff");
         socket.emit('chat message', request.sender, request.message, request.location, request.uid); 
       }
   });
