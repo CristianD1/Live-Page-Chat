@@ -15,4 +15,7 @@ Having seen numerous posts on 9gag and imgur commenting on things they've seen o
 Statistics that further track things like most discussed items on a page, would be incredibly useful to send to the owner of the respective page to better indicate what people are interested in.
 
 
-*WIP.
+#### Current State
+* Front-end complete
+* Server complete
+* connection is broken. WIP
