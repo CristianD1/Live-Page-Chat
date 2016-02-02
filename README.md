@@ -1,6 +1,6 @@
 # Live-Page-Chat
 
-[![The interface]](liveChatInterface.png)
+![The interface](liveChatInterface.png)
 
 ## What is it?
 
