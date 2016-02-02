@@ -18,4 +18,4 @@ Statistics that further track things like most discussed items on a page, would 
 #### Current State
 * Front-end complete
 * Server complete
-* TODO: publish as chrome extension
+* TODO: refine design to publish as chrome extension
