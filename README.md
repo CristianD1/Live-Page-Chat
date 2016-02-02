@@ -13,3 +13,6 @@ You would only be able to message those, for example, watching the exact same yo
 Having seen numerous posts on 9gag and imgur commenting on things they've seen on specific websites, I figured it would be interesting to see the kind of conversations that would come of only being able to talk to people interested in literally the exact same thing as you.
 
 Statistics that further track things like most discussed items on a page, would be incredibly useful to send to the owner of the respective page to better indicate what people are interested in.
+
+
+*WIP.
