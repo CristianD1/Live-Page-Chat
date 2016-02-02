@@ -1,4 +1,4 @@
-# Live-Page-Chat
+# Live-Page-to-Page-Chat
 
 ![The interface](liveChatInterface.png)
 
